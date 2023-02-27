@@ -7,14 +7,20 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Game.scss";
 
-const Player = ({user}) => (
+const Player = ({user}) => {
+    const history = useHistory();
+    function viewProfile(userId){
+        history.push("/registration");
+    }
+    return (
     <div className="player container">
-        <div className="player username">{user.username}</div>
-        <div className="player name">{user.name}</div>
+        <Button className="player " onClick={()=>viewProfile(user.id)}>{user.username}</Button>
         <div className="player id">id: {user.id}</div>
         <div className="player creationdate">{user.creationdate}</div>
     </div>
-);
+    );
+
+};
 
 Player.propTypes = {
     user: PropTypes.object
@@ -30,6 +36,7 @@ const Game = () => {
     // a component can have as many state variables as you like.
     // more information can be found under https://reactjs.org/docs/hooks-state.html
     const [users, setUsers] = useState(null);
+
 
     const logout = () => {
         localStorage.removeItem('token');
