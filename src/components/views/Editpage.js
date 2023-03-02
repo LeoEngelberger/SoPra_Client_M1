@@ -37,7 +37,7 @@ const Editpage = () => {
         try{
         const requestBody = JSON.stringify({birthday: newBirthday, username: newUsername});
         const response = await api.put("/user/" + user.id + "/editprofile", requestBody);
-
+        history.push("/profile/"+user.id)
         }catch(error){
             alert("username already taken");
         }
