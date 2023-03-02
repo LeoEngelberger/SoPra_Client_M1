@@ -5,10 +5,11 @@ class User {
   constructor(data = {}) {
     this.id = null;
     this.username = null;
-    this.password = null;
-    this.creation_date = null;
-    this.token = null;
     this.status = null;
+    this.creationdate = null;
+    this.birthday = "not assigned";
+    this.token = null;
+    this.password = null;
     Object.assign(this, data);
   }
 }

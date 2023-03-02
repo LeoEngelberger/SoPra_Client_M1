@@ -9,12 +9,12 @@ import "styles/views/Game.scss";
 
 const Player = ({user}) => {
     const history = useHistory();
-    function viewProfile(userId){
-        history.push("/registration");
+    function viewProfile(){
+        history.push("/profile/"+user.id);
     }
     return (
     <div className="player container">
-        <Button className="player " onClick={()=>viewProfile(user.id)}>{user.username}</Button>
+        <Button className="player " onClick={()=>viewProfile()}>{user.username}</Button>
         <div className="player id">id: {user.id}</div>
         <div className="player creationdate">{user.creationdate}</div>
     </div>
@@ -39,7 +39,10 @@ const Game = () => {
 
 
     const logout = () => {
+        let id = localStorage.getItem("currentUser");
+        api.put('/logout/' + id.toString());
         localStorage.removeItem('token');
+
         history.push('/login');
     }
 
