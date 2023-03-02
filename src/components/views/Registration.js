@@ -61,15 +61,15 @@ const Registration = props => {
 
   const createUser = async () => {
     try {
-      const requestBody = JSON.stringify({username, name, password});
-      const response = await api.post('/userregistration', requestBody);
+      const requestBody = JSON.stringify({username, password});
+      const response = await api.post('/users', requestBody);
 
       // Get the returned user and update a new object.
       const user = new User(response.data);
 
       // Store the token into the local storage.
       localStorage.setItem('token', user.token);
-
+      localStorage.setItem('currentUser', user.id);
       // Login successfully worked --> navigate to the route /game in the GameRouter
       history.push(`/game`);
     } catch (error) {
@@ -95,11 +95,6 @@ const Registration = props => {
             value={username}
             onChange={un => setUsername(un)}
           />
-          <FormField
-            label="Name"
-            value={name}
-            onChange={n => setName(n)}
-          />
           <PasswordField
               label="Password"
               value={password}
@@ -107,7 +102,7 @@ const Registration = props => {
           />
           <div className="registration button-container">
             <Button
-                disabled={!username || !password || !name}
+                disabled={!username || !password}
                 width="95%"
                 onClick={() => createUser()}
             >

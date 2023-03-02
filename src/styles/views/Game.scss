@@ -56,4 +56,11 @@
     font-family: $fontMono;
     font-weight: 300;
   }
+  &.username-button{
+    display: flex;
+    text-transform: unset;
+    font-weight: 500;
+    justify-content: center;
+    margin: 10px;
+  }
 }

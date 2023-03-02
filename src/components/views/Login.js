@@ -13,7 +13,7 @@ however be sure not to clutter your files with an endless amount!
 As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
-const FormField = props => {
+export const FormField = props => {
   return (
     <div className="login field">
       <label className="login label">
@@ -67,6 +67,7 @@ const Login = props => {
 
       // Store the token into the local storage.
       localStorage.setItem('token', user.token);
+      localStorage.setItem('currentUser', user.id);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
       history.push(`/game`);
@@ -124,3 +125,4 @@ const Login = props => {
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
 export default Login;
+
