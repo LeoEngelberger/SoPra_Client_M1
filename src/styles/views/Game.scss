@@ -10,7 +10,7 @@
 .game {
   &.container {
     background: $background;
-    padding: 1.5em;
+    padding: 2.5em;
     border-radius: $borderRadius;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,8 @@
   }
   &.user-list {
     list-style: none;
-    padding-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   &.user-item {
     display: flex;

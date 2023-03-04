@@ -15,7 +15,7 @@ specific components that belong to the main one in the same file.
  */
 export const FormField = props => {
   return (
-    <div className="login field">
+    <div className="login field" >
       <label className="login label">
         {props.label}
       </label>

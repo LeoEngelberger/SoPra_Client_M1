@@ -1,14 +1,32 @@
 import {useHistory, useParams} from "react-router-dom";
 import BaseContainer from "../ui/BaseContainer";
 import {api} from 'helpers/api';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Spinner} from "../ui/Spinner";
 import "styles/views/Game.scss";
-import {DayPicker} from 'react-day-picker';
+import {DayPicker, useInput} from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import {Button} from "../ui/Button";
-import {FormField} from "../views/Login";
 
+
+
+export const EditField = props => {
+    return (
+        <div className="login field">
+            <label className="login label">
+                {props.label}
+            </label>
+            <input
+                id={"change_name"}
+                hidden={true}
+                className="login input"
+                placeholder="has to be unique"
+                value={props.value}
+                onChange={e => props.onChange(e.target.value)}
+            />
+        </div>
+    );
+};
 
 
 const Editpage = () => {
@@ -18,6 +36,7 @@ const Editpage = () => {
     const [newBirthday, setNewBirthday] = useState(null);
     const [newUsername, setNewUsername] = useState(null);
     const [user, setUser] = useState(null);
+    let token = "";
     let content = <Spinner/>;
 
     useEffect(() => {
@@ -33,12 +52,16 @@ const Editpage = () => {
         getUser();
     }, [id]);
 
+
+
+
     const changeUserInfo = async () => {
-        try{
-        const requestBody = JSON.stringify({birthday: newBirthday, username: newUsername});
-        const response = await api.put("/user/" + user.id + "/editprofile", requestBody);
-        history.push("/profile/"+user.id)
-        }catch(error){
+        try {
+            token = localStorage.getItem("token");
+            const requestBody = JSON.stringify({birthday: newBirthday, username: newUsername, token: token});
+            const response = await api.put("/user/" + user.id + "/editprofile", requestBody);
+            history.push("/profile/" + user.id);
+        } catch (error) {
             alert("username already taken");
         }
 
@@ -47,46 +70,55 @@ const Editpage = () => {
 
     const selectBirthdate = async () => {
         setNewBirthday(selected.toDateString());
+        document.getElementById("datepicker").hidden = true;
         setSelected(null);
     }
 
     if (user) {
-        let footer = <p>Please pick a day.</p>;
+
         if (!user.birthday) {
-            user.birthday = "birthday is unavailable"
-        }
-        if (newBirthday) {
-            footer = <p>You picked {newBirthday}.</p>;
+            user.birthday = "not available"
         }
 
+
+        let datepicker = document.getElementById("change_name");
+        let username_edit_field = document.getElementById("datepicker");
 
         content = (
-            <BaseContainer className="game container">
-                <div className="game container">
+            <BaseContainer>
                     <h2>Edit Your Profile here</h2>
-                    <p>remember your username has to be unique</p>
-                    <p>current username: {user.username}</p>
-                    <FormField
-                        label="Username"
-                        value={newUsername}
-                        onChange={un => setNewUsername(un)}/>
-                    <p>current birthday: {user.birthday}</p>
-                    <p>new birthday: </p>
-                    <div>
-
-                        <DayPicker
-                            mode="single"
-                            selected={selected}
-                            onSelect={setSelected}
-                        />
-                        <Button onClick={() => selectBirthdate()} disabled={!selected}>
-                            Confirm new date
+                    <p></p>
+                    <div className="game user-item">
+                        <p> current username: {user.username} <Button
+                            onClick={() => document.getElementById("datepicker").hidden = !document.getElementById("datepicker").hidden}>
+                            edit
                         </Button>
-                    </div>
+                        <EditField
+                            id="change_name"
+                            value={newUsername}
+                            onChange={un => setNewUsername(un)}/>
+                        </p>
+                        <p>current birthday: {user.birthday} <Button
+                            onClick={() => document.getElementById("change_name").hidden = (!document.getElementById("change_name").hidden)}>
+                            Edit
+                        </Button></p>
+                        <div hidden={true} id="datepicker">
+                            <DayPicker
+                                mode="single"
+                                selected={selected}
+                                onSelect={setSelected}
+                                captionLayout="dropdown"
+                                fromYear={1930}
+                                toYear={2023}
+                            />
+
+                            <Button className="login button" onClick={() => selectBirthdate()} disabled={!selected}>
+                                Confirm new date
+                            </Button>
+                        </div>
+
                 </div>
                 <Button onClick={() => changeUserInfo()}> Save Changes </Button>
-
-
             </BaseContainer>
         );
     }
