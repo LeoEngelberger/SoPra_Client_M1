@@ -52,6 +52,12 @@ FormField.propTypes = {
   onChange: PropTypes.func
 };
 
+PasswordField.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
+};
+
 const Login = props => {
   const history = useHistory();
   const [username, setUsername] = useState(null);

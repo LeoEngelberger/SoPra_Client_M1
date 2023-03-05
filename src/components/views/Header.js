@@ -2,10 +2,6 @@ import React from "react";
 import {ReactLogo} from "components/ui/ReactLogo";
 import PropTypes from "prop-types";
 import "styles/views/Header.scss";
-import {Button} from "../ui/Button";
-import {useHistory} from 'react-router-dom';
-import BaseContainer from "components/ui/BaseContainer";
-import {api} from "../../helpers/api";
 
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.

@@ -9,15 +9,23 @@ import "styles/views/Game.scss";
 
 const Player = ({user}) => {
     const history = useHistory();
-    function viewProfile(){
-        history.push("/profile/"+user.id);
+
+    function viewProfile() {
+        history.push("/profile/" + user.id);
     }
+
     return (
-    <div className="player container">
-        <Button className="player " onClick={()=>viewProfile()}>{user.username}</Button>
-        <div className="player id">id: {user.id}</div>
-        <div className="player creationdate">{user.creationdate}</div>
-    </div>
+        <div className="player profile-container">
+
+
+            <Button className="player profile-button" onClick={() => viewProfile()}>
+                <div className="player field">Name: {user.username}  </div>
+                <div className="player field">  ☀  </div>
+                <div className="player field">ID: {user.id} </div>
+            </Button>
+                <div className="player creation-date-field">Creation Date:{user.creationdate}   </div>
+
+        </div>
     );
 
 };
@@ -93,8 +101,7 @@ const Game = () => {
                         <Player user={user} key={user.id}/>
                     ))}
                 </ul>
-                <Button
-                    width="100%"
+                <Button className="game logout-button"
                     onClick={() => logout()}
                 >
                     Logout

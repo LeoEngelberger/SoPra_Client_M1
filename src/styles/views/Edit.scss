@@ -1,16 +1,10 @@
 @import 'styles/theme';
 
-/* The '&' is a shorthand for the containing element,
-  so for example a '&.user-list' inside .game will compile to
-  .game.user-list
 
-  for more information visit https://sass-lang.com/guide
- */
-
-.game {
+.edit {
   &.container {
     background: $background;
-    padding: 10px;
+    padding: 2.5em;
     border-radius: $borderRadius;
     display: flex;
     flex-direction: column;
@@ -19,7 +13,8 @@
   }
   &.user-list {
     list-style: none;
-    padding: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   &.user-item {
     display: flex;
@@ -35,34 +30,16 @@
 .player {
   &.container {
     margin: 0.5em 0;
-    width: 80%;
+    width: 20em;
     padding: 10px;
     border-radius: $borderRadius;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    background: lighten($background, 5);
-  }
-  &.profile-container {
-    width: 50em;
-    padding: 10px;
-    border-radius: $borderRadius;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     background: lighten($background, 5);
   }
   &.name {
     font-weight: 300;
     margin-left: 5px;
-  }
-  &.field{
-    flex-direction: row;
-    font-size: large;
-  }
-  &.creation-date-field{
-    flex-direction: row;
-    font-size: small;
   }
   &.username {
     font-weight: 500;
@@ -80,16 +57,5 @@
     font-weight: 500;
     justify-content: center;
     margin: 10px;
-  }
-  &.profile-button{
-    display: flex;
-    width: 100%;
-    height: unset;
-    flex-direction: row;
-    text-transform: unset;
-    font-weight: 500;
-    justify-content: center;
-    margin: 10px;
-    background-color: #50794b;
   }
 }
