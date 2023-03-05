@@ -9,87 +9,73 @@
 
 .game {
   &.container {
-    background: $background;
-    padding: 10px;
-    border-radius: $borderRadius;
     display: flex;
     flex-direction: column;
+    border-radius: 0.5em;
+    background-color: $background;
+    @include center;
+  }
+  &.form{
+    background-color: #313140;
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 0.75em;
     align-items: center;
+    padding:2%;
+    transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
   }
-  &.user-list {
-    list-style: none;
-    padding: 20px;
-  }
-  &.user-item {
+  &.field{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
   }
-  & p,h2 {
-    margin: 0.5em 0;
+  &.button-container{
+    display: flex;
+    justify-content: center;
+
   }
+  &.label {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: $textColor;
+  }
+  &.user-item{
+    display: flex;
+    flex-direction: row;
+  }
+
+
 }
 
-.player {
-  &.container {
-    margin: 0.5em 0;
-    width: 80%;
-    padding: 10px;
-    border-radius: $borderRadius;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background: lighten($background, 5);
-  }
-  &.profile-container {
-    width: 50em;
-    padding: 10px;
-    border-radius: $borderRadius;
+.player{
+  &.container{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: lighten($background, 5);
+    border-radius: 0.5em;
+    @include center;
   }
-  &.name {
-    font-weight: 300;
-    margin-left: 5px;
+  &.button-container{
+    background-color: #569b78;
+    padding:3em;
+    margin:0.2em;
+    align-items: center;
+    height:10em;
+    min-width: 25%;
+    max-width: 100%;
   }
   &.field{
-    flex-direction: row;
-    font-size: large;
-  }
-  &.creation-date-field{
-    flex-direction: row;
-    font-size: small;
-  }
-  &.username {
-    font-weight: 500;
-    color: $accent;
-  }
-  &.id {
-    margin-left: auto;
-    margin-right: 10px;
-    font-family: $fontMono;
-    font-weight: 300;
-  }
-  &.username-button{
     display: flex;
-    text-transform: unset;
-    font-weight: 500;
+    flex-direction: column;
     justify-content: center;
-    margin: 10px;
+    text-align: center;
   }
-  &.profile-button{
-    display: flex;
-    width: 100%;
-    height: unset;
-    flex-direction: row;
-    text-transform: unset;
-    font-weight: 500;
-    justify-content: center;
-    margin: 10px;
-    background-color: #50794b;
+  &.creation-date{
+    padding:0;
+    margin:0;
   }
 }

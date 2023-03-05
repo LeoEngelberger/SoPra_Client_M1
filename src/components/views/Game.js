@@ -15,15 +15,15 @@ const Player = ({user}) => {
     }
 
     return (
-        <div className="player profile-container">
+        <div className="player container">
 
 
-            <Button className="player profile-button" onClick={() => viewProfile()}>
+            <Button className="player button-container" onClick={() => viewProfile()}>
                 <div className="player field">Name: {user.username}  </div>
                 <div className="player field">  ☀  </div>
                 <div className="player field">ID: {user.id} </div>
             </Button>
-                <div className="player creation-date-field">Creation Date:{user.creationdate}   </div>
+                <div className="player creation-date"><p>registered: </p>{user.creationdate}   </div>
 
         </div>
     );
@@ -95,13 +95,13 @@ const Game = () => {
 
     if (users) {
         content = (
-            <div className="game">
-                <ul className="game user-list">
+            <div className="game container">
+                <ul className="game form">
                     {users.map(user => (
                         <Player user={user} key={user.id}/>
                     ))}
                 </ul>
-                <Button className="game logout-button"
+                <Button className="game button-container"
                     onClick={() => logout()}
                 >
                     Logout
@@ -112,9 +112,9 @@ const Game = () => {
 
     return (
         <BaseContainer className="game container">
-            <h2>Happy Coding!</h2>
-            <p className="game paragraph">
-                Get all users from secure endpoint:
+            <h2>Hello There</h2>
+            <p>
+                all registered users:
             </p>
             {content}
         </BaseContainer>

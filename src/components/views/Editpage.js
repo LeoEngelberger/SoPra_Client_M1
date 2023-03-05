@@ -41,11 +41,16 @@ const Editpage = () => {
 
     useEffect(() => {
         async function getUser() {
+            let response;
             try {
-                const response = await api.get('/user/' + id.toString());
+                response = await api.get('/user/' + id.toString());
                 setUser(response.data);
             } catch (error) {
-                alert("couldn't find a user with this id");
+                if (error.response && error.response.status === 404) {
+                    alert("username already taken");
+                }else{
+                    alert("hei im the problem its me");
+                }
             }
         }
 
@@ -54,13 +59,29 @@ const Editpage = () => {
 
 
     const changeUserInfo = async () => {
+        let requestBody;
         try {
             token = localStorage.getItem("token");
-            const requestBody = JSON.stringify({birthday: newBirthday.toDateString(), username: newUsername, token: token});
+            if (newBirthday && newUsername!==user.username){
+                requestBody = JSON.stringify({birthday: newBirthday.toDateString(), username: newUsername, token: token});
+
+            }
+            else if(!newBirthday && newUsername!==user.username){
+                requestBody = JSON.stringify({ username: newUsername, token: token});
+            }
+            else if(newBirthday && newUsername===user.username){
+                requestBody = JSON.stringify({birthday: newBirthday.toDateString(), token: token});
+            }
             await api.put("/user/" + user.id + "/editprofile", requestBody);
             history.push("/profile/" + user.id);
+
         } catch (error) {
-            alert("username already taken");
+            if (error.response && error.response.status === 404) {
+                alert("username already taken");
+            }
+            else{
+                alert("and me");
+            }
         }
 
 
@@ -68,7 +89,7 @@ const Editpage = () => {
 
     const selectBirthdate = async () => {
         setNewBirthday(selected);
-        user.birthday = selected.toDateString();
+        user.birthday = selected.toDateString();;
         document.getElementById("datepicker").hidden = true;
         setSelected(null);
     }
@@ -92,11 +113,11 @@ const Editpage = () => {
         content = (
             <BaseContainer>
                 <h2>Edit Your Profile here</h2>
-                <p></p>
-                <div className="game user-list">
-                    <div className="game user-item">
-                        <div> current username: {user.username}
-                            <Button className="game button"
+                <div className="game container">
+                <div className="game form">
+                    <div className="game field">
+                        <div className="game user-item"> current username: {user.username}
+                            <Button className="game button-container"
                                 onClick={() => document.getElementById("change_name").hidden = (!document.getElementById("change_name").hidden)}>
                                 edit
                             </Button>
@@ -105,10 +126,10 @@ const Editpage = () => {
                                 value={newUsername}
                                 onChange={un => setNewUsername(un)}/>
                         </div>
-                        <p>current birthday: {user.birthday} <Button
+                        <div>current birthday: {user.birthday} <Button
                             onClick={() => document.getElementById("datepicker").hidden = !document.getElementById("datepicker").hidden}>
                             Edit
-                        </Button></p>
+                        </Button></div>
                     </div>
                     <div className="game user-item">
                         <div hidden={true} id="datepicker">
@@ -127,8 +148,8 @@ const Editpage = () => {
                         </div>
                     </div>
                 </div>
-                <p></p>
                 <Button onClick={() => changeUserInfo()}> Save Changes </Button>
+            </div>
             </BaseContainer>
         );
     }
