@@ -11,19 +11,19 @@ const Player = ({user}) => {
     const history = useHistory();
 
     function viewProfile() {
-        history.push("/profile/" + user.id);
+        history.push("/game/profile/" + user.id);
     }
 
     return (
-        <div className="player profile-container">
+        <div className="player container">
 
 
-            <Button className="player profile-button" onClick={() => viewProfile()}>
+            <Button className="player button-container" onClick={() => viewProfile()}>
                 <div className="player field">Name: {user.username}  </div>
                 <div className="player field">  ☀  </div>
                 <div className="player field">ID: {user.id} </div>
             </Button>
-                <div className="player creation-date-field">Creation Date:{user.creationdate}   </div>
+                <div className="player creation-date"><p>registered: </p>{user.creationdate}   </div>
 
         </div>
     );
@@ -36,7 +36,6 @@ Player.propTypes = {
 
 const Game = () => {
     // use react-router-dom's hook to access the history
-    const history = useHistory();
 
     // define a state variable (using the state hook).
     // if this variable changes, the component will re-render, but the variable will
@@ -45,14 +44,6 @@ const Game = () => {
     // more information can be found under https://reactjs.org/docs/hooks-state.html
     const [users, setUsers] = useState(null);
 
-
-    const logout = () => {
-        let id = localStorage.getItem("currentUser");
-        api.put('/logout/' + id.toString());
-        localStorage.removeItem('token');
-
-        history.push('/login');
-    }
 
     // the effect hook can be used to react to change in your component.
     // in this case, the effect hook is only run once, the first time the component is mounted
@@ -91,31 +82,30 @@ const Game = () => {
         fetchData();
     }, []);
 
-    let content = <Spinner/>;
+    let content = (
+        <div className="game container">
+        <Spinner/>
+        </div>
+    );
 
     if (users) {
         content = (
-            <div className="game">
-                <ul className="game user-list">
+            <div className="game container">
+                <h2>Hello There</h2>
+                <h3>
+                    all registered users:
+                </h3>
+                <ul className="game form">
                     {users.map(user => (
                         <Player user={user} key={user.id}/>
                     ))}
                 </ul>
-                <Button className="game logout-button"
-                    onClick={() => logout()}
-                >
-                    Logout
-                </Button>
             </div>
         );
     }
 
     return (
-        <BaseContainer className="game container">
-            <h2>Happy Coding!</h2>
-            <p className="game paragraph">
-                Get all users from secure endpoint:
-            </p>
+        <BaseContainer>
             {content}
         </BaseContainer>
     );

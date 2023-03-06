@@ -7,7 +7,6 @@ import "styles/views/Game.scss";
 import {Button} from "../ui/Button";
 
 
-
 const Profile = () => {
     const history = useHistory();
     const {id} = useParams()
@@ -29,37 +28,48 @@ const Profile = () => {
 
     let content = <Spinner/>;
 
-    //let birthday_content = <p>not available </p>;
     let edit_button = null;
+
+    const backToGame = async () => {
+        history.push("/game/");
+    };
+    let back_button = (<Button onClick={() => backToGame()}> back to dashboard </Button>);
     const editProfile = async () => {
-            history.push("/profile/"+ userprofile.id + "/editprofile" );
+        history.push("/game/profile/" + userprofile.id + "/editprofile");
     };
     if (userprofile) {
         if (!userprofile.birthday) {
             userprofile.birthday = "birthday is unavailable"
         }
-        if(localStorage.getItem('token') === userprofile.token){
+        if (localStorage.getItem('token') === userprofile.token) {
             edit_button = (<Button onClick={() => editProfile()}> Edit Profile </Button>);
         }
         //birthday_content = user.birthday;
         content = (
-            <div>
+            <div  className="profile container">
+
                 <h2> Welcome to the Profile of {userprofile.username} </h2>
-                <div className="game container">
-                    this profile was created on {userprofile.creationdate}
-                </div>
-                <div className="game container">
-                    {userprofile.username} currently is {userprofile.status}
-                </div>
-                <div className="game container">
-                    {userprofile.username}'s birthday is on the {userprofile.birthday}
+                <div className="profile form">
+                    <div className="profile field">
+                        {userprofile.username} currently is {userprofile.status}
+                    </div>
+                    <div className="profile field">
+                        {userprofile.username} was born on {userprofile.birthday}
+                    </div>
+                    <div className="profile field">
+                        this profile was created on {userprofile.creationdate}
+                    </div>
                     {edit_button}
+                    {back_button}
                 </div>
+
+
             </div>
-        );
+        )
+        ;
     }
     return (
-        <BaseContainer className="game container">
+        <BaseContainer>
             {content}
         </BaseContainer>
     );

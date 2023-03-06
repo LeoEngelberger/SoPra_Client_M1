@@ -2,53 +2,47 @@
 
 .registration {
   &.container {
-    margin-top: 2em;
-    min-height: 300px;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+    border-radius: 0.5em;
+    background-color: $background;
     @include center;
-    flex-direction: column;
   }
-  &.form {
+  &.form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 60%;
-    max-width: 30em;
-    height: 30em;
-    font-size: 16px;
-    font-weight: 300;
-    padding-left: 37px;
-    padding-right: 37px;
     border-radius: 0.75em;
-    background-color: $background;
+    align-items: center;
+    padding:5%;
     transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
   }
-  &.field {
+  &.input{
+    margin:2%;
+    border: none;
+    border-radius: 0.4em;
+    background: transparentize(white, 0.85);
+    color: $textColor;
+
+  }
+  &.field{
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  &.input {
-    height: 35px;
-    padding-left: 15px;
-    margin-left: -4px;
-    border: none;
-    border-radius: 0.75em;
-    margin-bottom: 20px;
-    background: transparentize(white, 0.85);
-    color: $textColor;
-  }
-  &.label {
-    color: $textColor;
-    margin-bottom: 10px;
-    text-transform: lowercase;
-    font-weight: 300;
-  }
-  &.button-container {
+  &.button-container{
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    min-height: 35px;
+    max-height: 60px;
+    min-width: 100px;
+    max-width: 150px;
+
+  }
+  &.label {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: $textColor;
   }
 
 }
