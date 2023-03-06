@@ -64,6 +64,9 @@
     flex-direction: column;
     border-radius: 0.5em;
     @include center;
+    background-color: rgba(38, 38, 50, 0.23);
+    padding: 0.4em;
+    margin:0.3em;
   }
 
   &.button-container {

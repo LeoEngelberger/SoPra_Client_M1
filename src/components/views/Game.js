@@ -15,6 +15,7 @@ const Player = ({user}) => {
     }
 
     return (
+
         <div className="player container">
 
 
@@ -24,8 +25,9 @@ const Player = ({user}) => {
                 <div className="player field">ID: {user.id} </div>
             </Button>
                 <div className="player creation-date"><p>registered: </p>{user.creationdate}   </div>
+            </div>
 
-        </div>
+
     );
 
 };
