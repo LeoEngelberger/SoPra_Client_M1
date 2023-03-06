@@ -37,7 +37,11 @@ const Editpage = () => {
     const [newUsername, setNewUsername] = useState(null);
     const [user, setUser] = useState(null);
     let token = "";
-    let content = <Spinner/>;
+    let content = (
+        <div className="edit container">
+        <Spinner/>
+        </div>
+    );
 
     useEffect(() => {
         async function getUser() {
