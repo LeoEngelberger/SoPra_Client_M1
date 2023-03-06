@@ -16,9 +16,9 @@ import "styles/views/Header.scss";
 const Header = props => (
 
   <div className="header container" style={{height: props.height}}>
-    <h1 className="header title">Fun?</h1>
+    <h1 className="header title">SoPra Fs23</h1>
     <ReactLogo width="40px" height="40px"/>
-      <h1 className="header title">NO!</h1>
+      <h1 className="header title">can start now</h1>
 
   </div>
 );
