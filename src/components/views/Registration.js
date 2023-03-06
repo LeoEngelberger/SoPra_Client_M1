@@ -3,7 +3,7 @@ import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Registration.scss';
+import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -15,12 +15,12 @@ specific components that belong to the main one in the same file.
  */
 const FormField = props => {
   return (
-    <div className="registration field">
+    <div className="login field">
       <label className="login label">
         {props.label}
       </label>
       <input
-        className="registration input"
+        className="login input"
         placeholder="enter here.."
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
@@ -31,13 +31,13 @@ const FormField = props => {
 
 const PasswordField = props => {
   return (
-      <div className="registration field">
-        <label className="registration label">
+      <div className="login field">
+        <label className="login label">
           {props.label}
         </label>
         <input
             type={"password"}
-            className="registration input"
+            className="login input"
             placeholder="enter here.."
             value={props.value}
             onChange={e => props.onChange(e.target.value)}
@@ -87,8 +87,8 @@ const Registration = props => {
 
   return (
     <BaseContainer>
-      <div className="registration container">
-        <div className="registration form">
+      <div className="login container">
+        <div className="login form">
           <FormField
             label="Username"
             value={username}
@@ -99,7 +99,7 @@ const Registration = props => {
               value={password}
               onChange={p => setPassword(p)}
           />
-          <div className="registration button-container">
+          <div className="login button-container">
             <Button
                 disabled={!username || !password}
                 width="95%"
@@ -109,7 +109,7 @@ const Registration = props => {
             </Button>
           </div>
 
-          <div className="registration button-container">
+          <div className="login button-container">
             <Button
                 width="95%"
                 onClick={() => backToLogin()}

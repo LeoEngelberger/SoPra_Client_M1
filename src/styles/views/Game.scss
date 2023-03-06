@@ -9,87 +9,146 @@
 
 .game {
   &.container {
-    background: $background;
-    padding: 10px;
-    border-radius: $borderRadius;
     display: flex;
     flex-direction: column;
+    border-radius: 0.5em;
+    background-color: $background;
+    @include center;
+  }
+
+  &.form {
+    background-color: $widgetColor;
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 0.75em;
     align-items: center;
+    padding: 2%;
+    transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
+    margin-bottom: 20%;
+
   }
-  &.user-list {
-    list-style: none;
-    padding: 20px;
+
+  &.field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
   }
+
+  &.button-container {
+    display: flex;
+    justify-content: center;
+
+  }
+
+  &.label {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: $textColor;
+  }
+
   &.user-item {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  & p,h2 {
-    margin: 0.5em 0;
+    flex-direction: row;
   }
 }
 
 .player {
   &.container {
-    margin: 0.5em 0;
-    width: 80%;
-    padding: 10px;
-    border-radius: $borderRadius;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background: lighten($background, 5);
-  }
-  &.profile-container {
-    width: 50em;
-    padding: 10px;
-    border-radius: $borderRadius;
     display: flex;
     flex-direction: column;
+    border-radius: 0.5em;
+    @include center;
+  }
+
+  &.button-container {
+    background-color: $specialButtons;
+    padding: 3em;
+    margin: 0.2em;
     align-items: center;
-    background: lighten($background, 5);
+    height: 10em;
+    min-width: 25%;
+    max-width: 100%;
   }
-  &.name {
-    font-weight: 300;
-    margin-left: 5px;
-  }
-  &.field{
-    flex-direction: row;
-    font-size: large;
-  }
-  &.creation-date-field{
-    flex-direction: row;
-    font-size: small;
-  }
-  &.username {
-    font-weight: 500;
-    color: $accent;
-  }
-  &.id {
-    margin-left: auto;
-    margin-right: 10px;
-    font-family: $fontMono;
-    font-weight: 300;
-  }
-  &.username-button{
+
+  &.field {
     display: flex;
-    text-transform: unset;
-    font-weight: 500;
+    flex-direction: column;
     justify-content: center;
-    margin: 10px;
+    text-align: center;
   }
-  &.profile-button{
+
+  &.creation-date {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.profile {
+  &.container {
     display: flex;
+    flex-direction: column;
+    border-radius: 0.5em;
+    @include center;
+    background-color: $background;
+    padding: 2%;
+  }
+
+  &.form {
+    background-color: $widgetColor;
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.75em;
+    align-items: center;
+    padding: 2% 10%;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    width: 80%;
+
+  }
+
+  &.field {
+    display: flex;
+    flex-direction: row;
+    @include center;
+    height: 3em;
+    max-width: 90%;
+    min-width: 50%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    background-color: rgba(38, 38, 50, 0.23);
+    border-radius: 0.5em;
+    text-align: center;
+    padding: 4%;
     width: 100%;
-    height: unset;
-    flex-direction: row;
-    text-transform: unset;
-    font-weight: 500;
+  }
+
+}
+
+.logout {
+  &.button {
+    background-color: $specialButtons;
+  }
+
+  &.container {
+    display: flex;
     justify-content: center;
-    margin: 10px;
-    background-color: #50794b;
+    background-color: $background;
+    border-radius: 0.5em;
+    padding: 1em 2em;
+  }
+
+  &.button-container {
+    @include center;
+    padding: 0.5em;
+    align-items: center;
+
   }
 }
