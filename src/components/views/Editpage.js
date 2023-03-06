@@ -3,23 +3,23 @@ import BaseContainer from "../ui/BaseContainer";
 import {api} from 'helpers/api';
 import React, {useEffect, useState} from "react";
 import {Spinner} from "../ui/Spinner";
-import "styles/views/Game.scss";
+import "styles/views/Edit.scss";
 import {DayPicker} from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import {Button} from "../ui/Button";
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 
 
 export const EditField = props => {
     return (
-        <div className="login field">
-            <label className="login label">
+        <div className="edit">
+            <label className="edit label">
                 {props.label}
             </label>
             <input
                 id={"change_name"}
                 hidden={true}
-                className="login input"
+                className="edit input"
                 placeholder="has to be unique"
                 value={props.value}
                 onChange={e => props.onChange(e.target.value)}
@@ -34,7 +34,7 @@ const Editpage = () => {
     const {id} = useParams();
     const [selected, setSelected] = useState(null)
     const [newBirthday, setNewBirthday] = useState(null);
-    const [newUsername, setNewUsername] = useState("");
+    const [newUsername, setNewUsername] = useState(null);
     const [user, setUser] = useState(null);
     let token = "";
     let content = <Spinner/>;
@@ -48,7 +48,7 @@ const Editpage = () => {
             } catch (error) {
                 if (error.response && error.response.status === 404) {
                     alert("username already taken");
-                }else{
+                } else {
                     alert("hei im the problem its me");
                 }
             }
@@ -62,24 +62,25 @@ const Editpage = () => {
         let requestBody;
         try {
             token = localStorage.getItem("token");
-            if (newBirthday && newUsername!==user.username){
-                requestBody = JSON.stringify({birthday: newBirthday.toDateString(), username: newUsername, token: token});
+            if (newBirthday && newUsername !== user.username) {
+                requestBody = JSON.stringify({
+                    birthday: newBirthday.toDateString(),
+                    username: newUsername,
+                    token: token
+                });
 
-            }
-            else if(!newBirthday && newUsername!==user.username){
-                requestBody = JSON.stringify({ username: newUsername, token: token});
-            }
-            else if(newBirthday && newUsername===user.username){
+            } else if (!newBirthday && newUsername !== user.username) {
+                requestBody = JSON.stringify({username: newUsername, token: token});
+            } else if (newBirthday && newUsername === user.username) {
                 requestBody = JSON.stringify({birthday: newBirthday.toDateString(), token: token});
             }
             await api.put("/user/" + user.id + "/editprofile", requestBody);
-            history.push("/profile/" + user.id);
+            history.push("/game/profile/" + user.id);
 
         } catch (error) {
             if (error.response && error.response.status === 404) {
                 alert("username already taken");
-            }
-            else{
+            } else {
                 alert("and me");
             }
         }
@@ -89,12 +90,11 @@ const Editpage = () => {
 
     const selectBirthdate = async () => {
         setNewBirthday(selected);
-        user.birthday = selected.toDateString();;
+        user.birthday = selected.toDateString();
+        ;
         document.getElementById("datepicker").hidden = true;
         setSelected(null);
     }
-
-
 
 
     if (user) {
@@ -109,52 +109,56 @@ const Editpage = () => {
         }
 
 
-
         content = (
-            <BaseContainer>
+            <div className="edit container">
                 <h2>Edit Your Profile here</h2>
-                <div className="game container">
-                <div className="game form">
-                    <div className="game field">
-                        <div className="game user-item"> current username: {user.username}
-                            <Button className="game button-container"
+
+                <div className="edit form">
+                    <div className="edit field">
+                        current username: {user.username}
+                        <Button className="edit button-container"
                                 onClick={() => document.getElementById("change_name").hidden = (!document.getElementById("change_name").hidden)}>
-                                edit
-                            </Button>
-                            <EditField
-                                id="change_name"
-                                value={newUsername}
-                                onChange={un => setNewUsername(un)}/>
+                            edit
+                        </Button>
+
+                    </div>
+                        <div>
+                        <EditField id="change_name" hidden={true}
+                                   value={newUsername}
+                                   onChange={un => setNewUsername(un)}/>
                         </div>
-                        <div>current birthday: {user.birthday} <Button
-                            onClick={() => document.getElementById("datepicker").hidden = !document.getElementById("datepicker").hidden}>
+                    <div className="edit field">
+                        current birthday: {user.birthday}
+                        <Button className="edit button-container"
+                                onClick={() => document.getElementById("datepicker").hidden = !document.getElementById("datepicker").hidden}>
                             Edit
                         </Button></div>
-                    </div>
-                    <div className="game user-item">
-                        <div hidden={true} id="datepicker">
-                            <DayPicker
-                                mode="single"
-                                selected={selected}
-                                onSelect={setSelected}
-                                captionLayout="dropdown"
-                                fromYear={1930}
-                                toYear={2023}
-                                footer={footer}
-                            />
-                            <Button className="login button" onClick={() => selectBirthdate()} disabled={!selected}>
-                                Confirm
-                            </Button>
-                        </div>
+                    <div hidden={true} id="datepicker" className="edit datepicker-container">
+                        <DayPicker
+                            className="edit datepicker"
+                            mode="single"
+                            selected={selected}
+                            onSelect={setSelected}
+                            captionLayout="dropdown"
+                            fromYear={1930}
+                            toYear={2023}
+                            footer={footer}
+                        />
+                        <Button className="edit button" onClick={() => selectBirthdate()} disabled={!selected}>
+                            Confirm
+                        </Button>
                     </div>
                 </div>
-                <Button onClick={() => changeUserInfo()}> Save Changes </Button>
+                <div className="edit button-container">
+                    <Button onClick={() => changeUserInfo()}>
+                        Save Changes
+                    </Button>
+                </div>
             </div>
-            </BaseContainer>
         );
     }
     return (
-        <BaseContainer className="game container">
+        <BaseContainer>
             {content}
         </BaseContainer>
     );

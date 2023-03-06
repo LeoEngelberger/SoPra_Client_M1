@@ -3,20 +3,26 @@
 
 .edit {
   &.container {
+    display: flex;
+    flex-direction: column;
     border-radius: 0.5em;
     background-color: $background;
     @include center;
   }
 
   &.form {
+    background-color: $widgetColor;
     display: flex;
+    flex: auto;
     flex-direction: column;
     justify-content: center;
     border-radius: 0.75em;
     align-items: center;
-    padding: 5%;
+    padding: 2% 10%;
     transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
+    width:80%;
+    @include center;
   }
 
   &.input {
@@ -29,9 +35,17 @@
   }
 
   &.field {
+    width:100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    @include center;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    background-color: rgba(38, 38, 50, 0.23);
+    border-radius: 0.5em;
+    text-align: center;
+    padding: 0%;
+
   }
 
   &.button-container {
@@ -44,6 +58,25 @@
     text-transform: uppercase;
     text-align: center;
     font-weight: 600;
+    color: $textColor;
+  }
+
+  &.inputField{
+    margin:2%;
+    border: none;
+    border-radius: 0.4em;
+    background: transparentize(white, 0.85);
+    color: $textColor;
+
+  }
+  &.datepicker-container{
+    border-radius: 0.4em;
+    background: transparentize(lightgrey, 0.95);
+    color: $textColor;
+  }
+  &.datepicker{
+    border-radius: 0.4em;
+    background: transparentize(darkslategrey, 0.55);
     color: $textColor;
   }
 

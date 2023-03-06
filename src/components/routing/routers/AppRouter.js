@@ -4,8 +4,7 @@ import GameRouter from "components/routing/routers/GameRouter";
 import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
 import Registration from "../../views/Registration";
-import Profile from "../../views/Profile"
-import Editpage from "../../views/Editpage";
+
 
 /**
  * Main router of your application.
@@ -34,17 +33,9 @@ const AppRouter = () => {
           <Redirect to="/game"/>
         </Route>
         <Route exact path="/registration">
+          <LoginGuard>
           <Registration/>
-        </Route>
-        <Route exact path ="/profile/:id">
-          <GameGuard>
-            <Profile/>
-          </GameGuard>
-        </Route>
-        <Route path ="/profile/:id/editprofile">
-          <GameGuard>
-            <Editpage/>
-          </GameGuard>
+          </LoginGuard>
         </Route>
       </Switch>
     </BrowserRouter>

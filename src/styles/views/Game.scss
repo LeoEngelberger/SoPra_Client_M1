@@ -15,8 +15,9 @@
     background-color: $background;
     @include center;
   }
-  &.form{
-    background-color: #313140;
+
+  &.form {
+    background-color: $widgetColor;
     display: flex;
     flex: auto;
     flex-wrap: wrap;
@@ -24,58 +25,130 @@
     justify-content: center;
     border-radius: 0.75em;
     align-items: center;
-    padding:2%;
+    padding: 2%;
     transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
+    margin-bottom: 20%;
+
   }
-  &.field{
+
+  &.field {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
   }
-  &.button-container{
+
+  &.button-container {
     display: flex;
     justify-content: center;
 
   }
+
   &.label {
     text-transform: uppercase;
     text-align: center;
     font-weight: 600;
     color: $textColor;
   }
-  &.user-item{
+
+  &.user-item {
     display: flex;
     flex-direction: row;
   }
-
-
 }
 
-.player{
-  &.container{
+.player {
+  &.container {
     display: flex;
     flex-direction: column;
     border-radius: 0.5em;
     @include center;
   }
-  &.button-container{
-    background-color: #569b78;
-    padding:3em;
-    margin:0.2em;
+
+  &.button-container {
+    background-color: $specialButtons;
+    padding: 3em;
+    margin: 0.2em;
     align-items: center;
-    height:10em;
+    height: 10em;
     min-width: 25%;
     max-width: 100%;
   }
-  &.field{
+
+  &.field {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
   }
-  &.creation-date{
-    padding:0;
-    margin:0;
+
+  &.creation-date {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.profile {
+  &.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5em;
+    @include center;
+    background-color: $background;
+    padding: 2%;
+  }
+
+  &.form {
+    background-color: $widgetColor;
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.75em;
+    align-items: center;
+    padding: 2% 10%;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    width: 80%;
+
+  }
+
+  &.field {
+    display: flex;
+    flex-direction: row;
+    @include center;
+    height: 3em;
+    max-width: 90%;
+    min-width: 50%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    background-color: rgba(38, 38, 50, 0.23);
+    border-radius: 0.5em;
+    text-align: center;
+    padding: 4%;
+    width: 100%;
+  }
+
+}
+
+.logout {
+  &.button {
+    background-color: $specialButtons;
+  }
+
+  &.container {
+    display: flex;
+    justify-content: center;
+    background-color: $background;
+    border-radius: 0.5em;
+    padding: 1em 2em;
+  }
+
+  &.button-container {
+    @include center;
+    padding: 0.5em;
+    align-items: center;
+
   }
 }
