@@ -1,6 +1,6 @@
 import {useHistory, useParams} from "react-router-dom";
 import BaseContainer from "../ui/BaseContainer";
-import {api} from 'helpers/api';
+import {api, apiIncAuth} from 'helpers/api';
 import {useEffect, useState} from "react";
 import {Spinner} from "../ui/Spinner";
 import "styles/views/Game.scss";
@@ -11,11 +11,12 @@ const Profile = () => {
     const history = useHistory();
     const {id} = useParams()
     const [userprofile, setUserprofile] = useState(null);
+    let token = localStorage.getItem("token");
 
     useEffect(() => {
         async function getUser() {
             try {
-                const response = await api.get('/user/' + id.toString(), {params: {id: id}});
+                const response = await apiIncAuth(token).get('/user/' + id.toString(), {params: {id: id}});
                 setUserprofile(response.data);
             } catch (error) {
                 alert("couldn't find a user with this id");

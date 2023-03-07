@@ -1,6 +1,6 @@
 import {useHistory, useParams} from "react-router-dom";
 import BaseContainer from "../ui/BaseContainer";
-import {api} from 'helpers/api';
+import {api, apiIncAuth} from 'helpers/api';
 import React, {useEffect, useState} from "react";
 import {Spinner} from "../ui/Spinner";
 import "styles/views/Edit.scss";
@@ -36,7 +36,7 @@ const Editpage = () => {
     const [newBirthday, setNewBirthday] = useState(null);
     const [newUsername, setNewUsername] = useState(null);
     const [user, setUser] = useState(null);
-    let token = "";
+    let token = localStorage.getItem("token");
     let content = (
         <div className="edit container">
         <Spinner/>
@@ -47,7 +47,7 @@ const Editpage = () => {
         async function getUser() {
             let response;
             try {
-                response = await api.get('/user/' + id.toString());
+                response = await apiIncAuth(token).get('/user/' + id.toString());
                 setUser(response.data);
             } catch (error) {
                 if (error.response && error.response.status === 404) {
@@ -65,7 +65,6 @@ const Editpage = () => {
     const changeUserInfo = async () => {
         let requestBody;
         try {
-            token = localStorage.getItem("token");
             if (newBirthday && newUsername !== user.username) {
                 requestBody = JSON.stringify({
                     birthday: newBirthday.toDateString(),
@@ -78,7 +77,7 @@ const Editpage = () => {
             } else if (newBirthday && newUsername === user.username) {
                 requestBody = JSON.stringify({birthday: newBirthday.toDateString(), token: token});
             }
-            await api.put("/user/" + user.id + "/editprofile", requestBody);
+            await apiIncAuth(token).put("/user/" + user.id + "/editprofile", requestBody);
             history.push("/game/profile/" + user.id);
 
         } catch (error) {

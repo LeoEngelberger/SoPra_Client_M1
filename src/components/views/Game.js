@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {api, handleError} from 'helpers/api';
+import {api, apiIncAuth, handleError} from 'helpers/api';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory} from 'react-router-dom';
@@ -45,6 +45,7 @@ const Game = () => {
     // a component can have as many state variables as you like.
     // more information can be found under https://reactjs.org/docs/hooks-state.html
     const [users, setUsers] = useState(null);
+    let token = localStorage.getItem("token");
 
 
     // the effect hook can be used to react to change in your component.
@@ -55,7 +56,7 @@ const Game = () => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
             try {
-                const response = await api.get('/users');
+                const response = await apiIncAuth(token).get('/users');
 
                 // delays continuous execution of an async operation for 1 second.
                 // This is just a fake async call, so that the spinner can be displayed
